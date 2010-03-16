@@ -1,0 +1,41 @@
+For the updated information please see http://www.ilbcfreeware.org.
+
+The upstream authors are:
+
+    S. Andersen
+    Aalborg University
+    A. Duric
+    Telio
+    H. Astrom
+    R. Hagen
+    W. Kleijn
+    J. Linden
+    Global IP Sound
+
+    Global IP Solutions (GIPS) AB
+    Magnus Ladulåsgatan 63B
+    SE-118 27, Stockholm, Sweden
+    +46.8.545.5.30.40 tel
+    +46.8.545.5.30.49 fax
+    info@gipscorp.com
+
+The copyright of the downloaded IETF paper is held by:
+
+    Copyright (C) 2004 The Internet Society
+
+Licensing information is available from:
+
+    Global IP Solutions (GIPS) AB
+    Magnus Ladulåsgatan 63B
+    SE-118 27, Stockholm, Sweden
+    +46.8.545.5.30.40 tel
+    +46.8.545.5.30.49 fax
+    info@gipscorp.com
+
+iLBC and Global IP Solutions are trademarks of Global IP Solutions.
+
+The 'awk' script to extract the source code was written by Wenyu Jiang
+at Columbia University.
+
+An earlier version of this package was prepared by Simon Morlat
+< simon dot morlat at linphone dot org > for use with linphone.
