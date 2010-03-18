@@ -1,3 +1,2 @@
-src/rfc3951.txt
-src/extract-cfile.awk
-
+downloads/rfc3951.txt
+downloads/extract-cfile.awk

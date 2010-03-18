@@ -1,3 +1,11 @@
+libilbc0-rfc3951 (0.6-1) karmic; urgency=low
+
+  * New release
+
+  * Scripts now look in ./downloads before getting files from network
+
+ -- Not Available <none@none.net>  Wed, 17 Mar 2010 19:46:57 -0700
+
 libilbc0-rfc3951 (0.5-1) unstable; urgency=low
 
   * Initial release

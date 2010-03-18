@@ -10,6 +10,14 @@
 export DH_VERBOSE=1
 
 
+# THIS SECTION IS VERY PACKAGE SPECIFIC
+# these are to import files that would otherwise have to be downloaded
+docdir_dev=/usr/share/doc/libilbc0-rfc3951-dev
+docdir=/usr/share/doc/libilbc0-rfc3951
+specification=$(docdir_dev)/rfc3951.txt.gz
+extract_script=$(docdir_dev)/extract-cfile.awk
+license=$(docdir)/gips_iLBClicense.pdf.gz
+
 # These are used for cross-compiling and for saving the configure script
 # from having to guess our platform (since we know it already)
 DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
@@ -49,6 +57,16 @@ build-stamp:  config.status $(QUILT_STAMPFN)
 	dh_testdir
 
 	# Add here commands to compile the package.
+	# THE FOLLOWING FILE IMPORTS ARE HIGHLY CUSTOMIZED
+	# PREVENTS UNNECESSARY DOWNLOADS IF FILES ARE INSTALLED ALREADY
+	for file in $(specification) $(extract_script) $(license); do \
+		if test -f $$file ; then \
+			cp $$file downloads/ ; \
+		fi ; \
+	done
+	find downloads/ -maxdepth 1 -name '*.gz' -execdir gzip -d '{}' ';'
+
+
 	$(MAKE)
 
 	touch $@
