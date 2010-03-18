@@ -33,7 +33,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-subdir = license
+subdir = downloads
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
@@ -161,11 +161,27 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
+
+# here are the file names and urls for the technical specification
+technical_spec = rfc3951.txt
+technical_spec_url = http://www.ietf.org/rfc/$(technical_spec)
+
+# for the extract script
+extract_script = extract-cfile.awk
+extract_script_url = http://www.ilbcfreeware.org/documentation/$(extract_script)
+
+# and for the license
 license = gips_iLBClicense.pdf
 license_url = http://www.ilbcfreeware.org/documentation/$(license)
-#license_url = http://gipscorp.com/files/english/$(license)
-BUILT_SOURCES = $(license)
-DISTCLEANFILES = $(license)
+# license_url = http://gipscorp.com/files/english/$(license)
+downloaded_files = $(technical_spec) $(extract_script) $(license)
+checkmarks = $(downloaded_files:%=%.check)
+success_marker = ../src/iLBC_define.h
+BUILT_SOURCES = $(downloaded_files) $(checkmarks) $(success_marker)
+checksum_dir = $(srcdir)/known_checksums
+checksum_files = $(addprefix $(checksum_dir)/, $(downloaded_files:%=%.md5))
+EXTRA_DIST = $(checksum_files)
+DISTCLEANFILES = $(BUILT_SOURCES)
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -179,9 +195,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu license/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu downloads/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu license/Makefile
+	  $(AUTOMAKE) --gnu downloads/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -356,8 +372,24 @@ uninstall-am:
 	mostlyclean-libtool pdf pdf-am ps ps-am uninstall uninstall-am
 
 
+$(technical_spec):
+	$(WGET) $(technical_spec_url)
+
+$(extract_script):
+	$(WGET) $(extract_script_url)
+
 $(license):
 	$(WGET) $(license_url)
+
+# for check, go to $(srcdir) or ./, depending on where file is
+$(checkmarks): %.check: %
+	cd $(<D); $(MD5SUM) -c $(checksum_dir)/$(<F).md5
+	touch $@
+
+# cleaning up in ../src is necessary because the awk script appends
+$(success_marker): $(extract_script) $(technical_spec) $(checkmarks)
+	cd ../src; rm *.c *.h >& /dev/null; $(AWK) -f $(CURDIR)/$< \
+		$(CURDIR)/$(word 2, $+) > /dev/null
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
