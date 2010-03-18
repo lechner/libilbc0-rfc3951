@@ -1,13 +1,13 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT([libilbc0-rfc3951],[0.5])
+AC_INIT([libilbc0-rfc3951],[0.6])
 AC_PREREQ(2.64)
-AC_CONFIG_SRCDIR([src/known_checksums/rfc3951.txt.md5])
+AC_CONFIG_SRCDIR([downloads/known_checksums/rfc3951.txt.md5])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 
-AM_INIT_AUTOMAKE([tar-ustar])
+AM_INIT_AUTOMAKE([tar-ustar --warnings=no-portability])
 
 # Checks for programs.
 AC_PROG_AWK
@@ -33,10 +33,10 @@ AC_CHECK_LIB([m],[cosf])
 # Create the following files from their .in counterparts
 AC_CONFIG_FILES([
   Makefile
+  downloads/Makefile
   src/Makefile
   pkgconfig/Makefile
   pkgconfig/ilbc.pc
   man/Makefile
-  license/Makefile
 ])
 AC_OUTPUT
