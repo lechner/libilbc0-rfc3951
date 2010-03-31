@@ -1,3 +1,10 @@
+libilbc0-rfc3951 (0.6-2) karmic; urgency=low
+
+  * Provided libilbc and libilbc-dev in addition to libilbc0 and
+  libilbc0-dev
+
+ -- Not Available <none@none.net>  Tue, 30 Mar 2010 21:30:01 -0700
+
 libilbc0-rfc3951 (0.6-1) karmic; urgency=low
 
   * New release

@@ -11,7 +11,7 @@ Section: non-free/libs
 Architecture: any
 Pre-Depends: debconf (>= 0.2.17)
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Provides: libilbc0
+Provides: libilbc0, libilbc
 Description: iLBC codec for voice communication
  iLBC (internet Low Bitrate Codec) is a FREE speech codec suitable
  for robust voice communication over IP.
@@ -46,7 +46,7 @@ Package: libilbc0-rfc3951-dev
 Section: non-free/libdevel
 Architecture: any
 Depends: libilbc0-rfc3951 (= ${binary:Version}), ${misc:Depends}
-Provides: libilbc0-dev
+Provides: libilbc0-dev, libilbc-dev
 Description: iLBC codec for voice communication (development files)
  iLBC (internet Low Bitrate Codec) is a FREE speech codec suitable
  for robust voice communication over IP.
